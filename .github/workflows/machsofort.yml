@@ -22,3 +22,14 @@ jobs:
         with:
           push: true
           tags: pipunisher/deploytest:dev
+
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /root
+            docker compose pull
+            docker compose up -d
