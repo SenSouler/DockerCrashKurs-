@@ -1,8 +1,7 @@
-FROM debian:bookworm-slim
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
-RUN nvm install 26
+FROM node:26-bookworm
 WORKDIR /app
 COPY . .
 RUN npm install
-CMD ["run", "dev"]
+EXPOSE 5173
+CMD ["run", "dev", "--", "--host", "0.0.0.0"]
 ENTRYPOINT ["npm"]
